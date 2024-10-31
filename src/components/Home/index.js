@@ -1,7 +1,11 @@
 import React from "react";
 import "./index.css";
+import productsData from '../../data/products';
 
-function Home() {
+function Home({ addToCart }) {
+
+    const [products, setProducts] = useState(productsData);
+
     return (
         <div className="layout-column align-items-center justify-content-start" data-testid="home">
             <h3 data-testid="home-heading">Home</h3>
@@ -17,7 +21,22 @@ function Home() {
                             </tr>
                         </thead>
                         <tbody data-testid="products">
-                            <tr key={`row-1`}>
+                            {products.map((product) => (
+                                <tr key={`row-${product.id}`}>
+                                    <td data-testid={`product-name-${product.id}`}>{product.name}</td>
+                                    <td data-testid={`product-description-${product.id}`}>{product.description}</td>
+                                    <td data-testid={`product-cost-${product.id}`}>${product.cost.toFixed(2)}</td>
+                                    <td>
+                                        <button
+                                            data-testid={`add-to-cart-button-${product.id}`}
+                                            onClick={() => addToCart(product)}
+                                        >
+                                            Add to cart
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                            {/* <tr key={`row-1`}>
                                 <td data-testid={`product-name-1`}>Product 1</td>
                                 <td data-testid={`product-description-1`}>This is the first product</td>
                                 <td data-testid={`product-cost-1`}>$9.99</td>
@@ -36,7 +55,7 @@ function Home() {
                                         Add to cart
                                     </button>
                                 </td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>
