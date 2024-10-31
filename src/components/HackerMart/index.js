@@ -24,8 +24,8 @@ function HackerMart() {
 			<div className="layout-column align-items-center justify-content-start">
 				<Navbar data-testid="header" />
 				<Routes>
-					<Route element={<Home addToCart={addToCart} />} />
-					<Route element={<Cart cartItems={cart} removeFromCart={removeFromCart} />} />
+					<Route exact path="/" element={<Home  addToCart={addToCart} />} />
+					<Route path="/cart" element={<Cart cartItems={cart} removeFromCart={removeFromCart} />} />
 				</Routes>
 			</div>
 		</div>
